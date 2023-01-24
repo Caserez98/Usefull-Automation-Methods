@@ -1,0 +1,60 @@
+import org.openqa.selenium.support.Color;
+import java.util.Arrays;
+
+import org.openqa.selenium.WebElement;
+
+public class CssPropertiesValidatorMethods {
+	/*
+	 * Validate if an element has the right css properties of Color ,Font-Family and
+	 * Font-Size. You should pass an array of Strings with the properties that the Web Application has, like fonts-family ['Lato','Comic Sans','Arial'] and the method will
+   * compare those expected properties with the actual property of the Web Element that you are passing as parameter.
+	 * 
+	 * @author: alexander.lara
+	 * 
+	 * @date: 05/09/2022
+	 * 
+	 * @param: WebElement, String
+	 * 
+	 * @return: boolean
+	 */
+
+	public boolean areFontsPropertiesValid(WebElement element, String[] fontColor, String fontFamily,
+			String[] fontSizes) {
+		boolean isColorOk, isSizeOk, isFamilyOk;
+		String elementFontColor = Color.fromString(element.getCssValue("color")).asHex().toUpperCase();
+		String elementFontFamily = element.getCssValue("font-family");
+		String elementFontSize = element.getCssValue("font-size");
+
+		isFamilyOk = elementFontFamily.contains(fontFamily);
+		isColorOk = Arrays.asList(fontColor).contains(elementFontColor);
+		isSizeOk = Arrays.asList(fontSizes).contains(elementFontSize);
+
+		return ((isColorOk) && (isFamilyOk) && (isSizeOk));
+
+	}
+	/*
+	 * Validate if an element has the right css properties of for image widht and
+	 * height The CssProperties variables are located in the package
+	 * 
+	 * 
+	 * @author: alexander.lara
+	 * 
+	 * @date: 05/09/2022
+	 * 
+	 * @param: WebElement, String[]
+	 * 
+	 * @return: boolean
+	 */
+
+	public boolean areImagePropertiesValid(WebElement element, String[] width, String[] height) {
+		boolean isWidthOk, isHeightOk;
+		String elementWidth = element.getCssValue("max-width");
+		String elementHeight = element.getCssValue("height");
+		isWidthOk = Arrays.asList(width).contains(elementWidth);
+
+		isHeightOk = Arrays.asList(height).contains(elementHeight);
+
+		return ((isWidthOk) && (isHeightOk));
+	}
+
+}
